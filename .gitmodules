@@ -1,0 +1,3 @@
+[submodule "five-letter-words"]
+	path = five-letter-words
+	url = https://github.com/jameshalgren/five-letter-words
