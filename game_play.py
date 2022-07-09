@@ -48,9 +48,32 @@ def game_play(game_type=None):
                 break
         results = wm.guess_game(guess, results)
         print(results)
+        show_results(results)
         if results["guesses"][guess][0] == [0, 1, 2, 3, 4]:
             print("You WON!!!!")
             still_guessing = 0
+
+
+def show_results(results=None):
+    for g, wr in results["guesses"].items():
+        show_positions(g, *wr)
+
+
+# show_positions(guess, *results["guesses"][guess])
+def show_positions(guess, rightpos, wrongpos):
+    # print(guess, rightpos, wrongpos)
+    display = ""
+    for i, l in enumerate(guess):
+        if i not in (set(rightpos) | set(wrongpos)):
+            _l = "_"
+        elif i in rightpos:
+            _l = l.upper()
+        else:
+            _l = l
+
+        display += _l
+
+    print(guess + ": " + " ".join(display) + " ")
 
 
 if __name__ == "__main__":
