@@ -31,17 +31,18 @@ def main():
             print("boo hoo. try typing 1, 2, or 3.")
 
 
-def game_play(game_type=None):
+def game_play(game_type=None, answer=None):
     all_words = get_words()
     results = {}
-    answer = random.choice(all_words)
+    if not answer:
+        answer = random.choice(all_words).lower()  # Just in case, pun intended
     results["answer"] = answer
     print(answer)
 
     still_guessing = 1
     while still_guessing == 1:
         while True:
-            guess = input("Enter guess: ")
+            guess = input("Enter guess: ").lower()
             if len(guess) != 5:
                 print("Must be 5 letters!")
             else:
@@ -50,7 +51,7 @@ def game_play(game_type=None):
         print(results)
         show_results(results)
         if results["guesses"][guess][0] == [0, 1, 2, 3, 4]:
-            print("You WON!!!!")
+            print("You WON!!!!\n")
             still_guessing = 0
 
 
