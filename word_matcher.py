@@ -20,15 +20,26 @@ def rightpos_check(guess, answer):
 def wrongpos_check(guess, answer, rightpos=None):
     if not rightpos:
         rightpos = rightpos_check(guess, answer)
-    answer_remain = "".join(l for _i, l in enumerate(answer) if _i not in rightpos)
     wrongpos = []
-    for _i, _gl in enumerate(guess):
+    answer_remain = []
+    guess_remain = []
+    for _i, _l in enumerate(answer):
+        if _i in rightpos:
+            answer_remain.append("&")  # TODO: make this a null character
+            guess_remain.append("%")  # NOTE: if these are the same, use test below
+        else:
+            answer_remain.append(_l)
+            guess_remain.append(guess[_i])
+
+    for _i, _gl in enumerate(guess_remain):
         if _gl in answer_remain:
-            answer_remain = answer_remain.replace(_gl, "", 1)
-            wrongpos.append(
-                [_i for _al in answer if (_gl == _al) and (_i not in rightpos)]
-            )
-    return sorted(list(set(chain(*wrongpos))))
+            if True:
+                # if answer_remain[_i] != _gl:  # NOTE: Use this test if replace characters are the same
+                if _gl not in guess_remain[:_i]:
+                    wrongpos.append(_i)
+                elif guess_remain[:_i].count(_gl) < answer_remain.count(_gl):
+                    wrongpos.append(_i)
+    return wrongpos
 
 
 def new_double_letter_check(guess, rightpos, wrongpos):

@@ -38,6 +38,27 @@ def test_position_check():
     answer = "ansse"
     assert position_check(guess, answer) == ("gsuse", [3, 4], [1])
 
+    guess = "lllssl"
+    answer = "lqqlll"
+    assert position_check(guess, answer) == ("lllssl", [0, 5], [1, 2])
+
+    # Prefer a rightly positioned letter multiple over a wrongly positioned one
+    guess = "llllsl"
+    answer = "lqqlll"
+    assert position_check(guess, answer) == ("llllsl", [0, 3, 5], [1])
+
+    guess = "llsssl"
+    answer = "lqqlll"
+    assert position_check(guess, answer) == ("llsssl", [0, 5], [1])
+
+    guess = "lllsss"
+    answer = "qqqlll"
+    assert position_check(guess, answer) == ("lllsss", [], [0, 1, 2])
+
+    guess = "pulls"
+    answer = "spill"
+    assert position_check(guess, answer) == ("pulls", [3], [0, 2, 4])
+
     guess = "answe"
     answer = "answe"
     assert position_check(guess, answer) == ("answe", [0, 1, 2, 3, 4], [])
