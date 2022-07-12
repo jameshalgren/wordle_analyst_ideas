@@ -3,6 +3,9 @@ from itertools import chain
 import string
 
 LETTERS = string.ascii_lowercase
+FLW = "five_letter_words"
+OWL = "wordle_official_answer_list"
+BWL = "built_in_word_list"
 
 
 def list_maker(n, l=5):
